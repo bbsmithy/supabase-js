@@ -52,6 +52,13 @@ describe('Custom Headers', () => {
   })
 })
 
+describe('Get URL of query', () => {
+  test('should return url from query builder', () => {
+    const url = supabase.from('table').select('*').eq('test_col', 'TEST').getURL()
+    expect(url.search).toBe('?select=*&test_col=eq.TEST')
+  })
+})
+
 // Socket should close when there are no open connections
 // https://github.com/supabase/supabase-js/issues/44
 
