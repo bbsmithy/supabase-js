@@ -1,5 +1,19 @@
 # `supabase-js`
 
+Fork of https://github.com/supabase/supabase-js with small change to allow users to switch out their supabase URL with their [Evervault Relay](https://docs.evervault.com/concepts/relay/overview) URL for any request. For example:
+
+```js
+const supabase = createClient(supabaseUrl, SUPABASE_KEY)
+
+supabase
+    .from("some_table")
+    .select("*")
+    .eq("client_id", id)
+    .useEvervault();
+```
+
+This will send the query request through Evervault relay endpoint (for encryption/decryption) first before being forwarded on to supabase service. Leave out `.useEvervault()` and request will go straight to supabase as normal.
+
 An isomorphic JavaScript client for Supabase.
 
 - **Documentation:** https://supabase.io/docs/client/supabase-client
